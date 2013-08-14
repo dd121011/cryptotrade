@@ -78,7 +78,7 @@ public class BTCE {
 		if( order != null && order.length() > 0 ) args.add(new BasicNameValuePair("order", order)) ;
 		if( since > 0 ) args.add(new BasicNameValuePair("since", Long.toString(since))) ;
 		if( end > 0 ) args.add(new BasicNameValuePair("end", Long.toString(end))) ;
-		if( pair != null && order.length() > 0 ) args.add(new BasicNameValuePair("pair", pair)) ;
+		if( pair != null && pair.length() > 0 ) args.add(new BasicNameValuePair("pair", pair)) ;
 		return request("TradeHistory",args) ;
 	}
 	
@@ -95,20 +95,23 @@ public class BTCE {
 		if( order != null && order.length() > 0 ) args.add(new BasicNameValuePair("order", order)) ;
 		if( since > 0 ) args.add(new BasicNameValuePair("since", Long.toString(since))) ;
 		if( end > 0 ) args.add(new BasicNameValuePair("end", Long.toString(end))) ;
-		if( pair != null && order.length() > 0 ) args.add(new BasicNameValuePair("pair", pair)) ;
+		if( pair != null && pair.length() > 0 ) args.add(new BasicNameValuePair("pair", pair)) ;
 		if( active > 0 ) args.add(new BasicNameValuePair("active", Long.toString(active))) ;
 		return request("OrderList",args) ;
 	}
 	
-	public String executeTrade() throws CryptoTradeException {
+	public String executeTrade(String pair,String type,double rate,double amount) throws CryptoTradeException {
 		List<NameValuePair> args = new ArrayList<NameValuePair>() ;		
-		//args.add(new BasicNameValuePair("method", method)) ;
+		args.add(new BasicNameValuePair("pair", pair)) ;
+		args.add(new BasicNameValuePair("type", type)) ;
+		args.add(new BasicNameValuePair("rate", Double.toString(rate))) ;
+		args.add(new BasicNameValuePair("amount", Double.toString(amount))) ;
 		return request("Trade",args) ;
 	}
 	
 	public String cancelTrade(int order_id) throws CryptoTradeException {
 		List<NameValuePair> args = new ArrayList<NameValuePair>() ;		
-		//args.add(new BasicNameValuePair("method", method)) ;
+		args.add(new BasicNameValuePair("order_id", Integer.toString(order_id))) ;
 		return request("CancelTrade",args) ;
 	}
 	
