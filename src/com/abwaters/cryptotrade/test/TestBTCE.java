@@ -14,6 +14,8 @@ public class TestBTCE {
 		BTCE btce = new BTCE(p) ;
 		Info info = btce.getInfo() ;
 		System.out.println(info) ;
-		System.out.println(btce.getTransactionHistory()) ;
+		System.out.println("Transaction History: "+btce.getTransactionHistory()) ;
+		System.out.println("Trade History: "+btce.getTradeHistory()) ;
+		System.out.println("Order List: "+btce.getOrderList()) ;
 	}
 }

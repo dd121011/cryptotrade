@@ -64,16 +64,39 @@ public class BTCE {
 		if( end > 0 ) args.add(new BasicNameValuePair("end", Long.toString(end))) ;
 		return request("TransHistory",args) ;
 	}
-	
+
 	public String getTradeHistory() throws CryptoTradeException {
+		return getTradeHistory(0,0,0,0,null,0,0,null) ;
+	}
+
+	public String getTradeHistory(int from,int count,int from_id,int end_id,String order,long since,long end,String pair) throws CryptoTradeException {
 		List<NameValuePair> args = new ArrayList<NameValuePair>() ;		
-		//args.add(new BasicNameValuePair("method", method)) ;
+		if( from > 0 ) args.add(new BasicNameValuePair("from", Integer.toString(from))) ;
+		if( count > 0 ) args.add(new BasicNameValuePair("count", Integer.toString(count))) ;
+		if( from_id > 0 ) args.add(new BasicNameValuePair("from_id", Integer.toString(from_id))) ;
+		if( end_id > 0 ) args.add(new BasicNameValuePair("end_id", Integer.toString(end_id))) ;
+		if( order != null && order.length() > 0 ) args.add(new BasicNameValuePair("order", order)) ;
+		if( since > 0 ) args.add(new BasicNameValuePair("since", Long.toString(since))) ;
+		if( end > 0 ) args.add(new BasicNameValuePair("end", Long.toString(end))) ;
+		if( pair != null && order.length() > 0 ) args.add(new BasicNameValuePair("pair", pair)) ;
 		return request("TradeHistory",args) ;
 	}
 	
 	public String getOrderList() throws CryptoTradeException {
+		return getOrderList(0,0,0,0,null,0,0,null,0) ;
+	}
+	
+	public String getOrderList(int from,int count,int from_id,int end_id,String order,long since,long end,String pair,int active) throws CryptoTradeException {
 		List<NameValuePair> args = new ArrayList<NameValuePair>() ;		
-		//args.add(new BasicNameValuePair("method", method)) ;
+		if( from > 0 ) args.add(new BasicNameValuePair("from", Integer.toString(from))) ;
+		if( count > 0 ) args.add(new BasicNameValuePair("count", Integer.toString(count))) ;
+		if( from_id > 0 ) args.add(new BasicNameValuePair("from_id", Integer.toString(from_id))) ;
+		if( end_id > 0 ) args.add(new BasicNameValuePair("end_id", Integer.toString(end_id))) ;
+		if( order != null && order.length() > 0 ) args.add(new BasicNameValuePair("order", order)) ;
+		if( since > 0 ) args.add(new BasicNameValuePair("since", Long.toString(since))) ;
+		if( end > 0 ) args.add(new BasicNameValuePair("end", Long.toString(end))) ;
+		if( pair != null && order.length() > 0 ) args.add(new BasicNameValuePair("pair", pair)) ;
+		if( active > 0 ) args.add(new BasicNameValuePair("active", Long.toString(active))) ;
 		return request("OrderList",args) ;
 	}
 	
@@ -81,6 +104,12 @@ public class BTCE {
 		List<NameValuePair> args = new ArrayList<NameValuePair>() ;		
 		//args.add(new BasicNameValuePair("method", method)) ;
 		return request("Trade",args) ;
+	}
+	
+	public String cancelTrade(int order_id) throws CryptoTradeException {
+		List<NameValuePair> args = new ArrayList<NameValuePair>() ;		
+		//args.add(new BasicNameValuePair("method", method)) ;
+		return request("CancelTrade",args) ;
 	}
 	
 	public void initializeProperties(Properties p) {
